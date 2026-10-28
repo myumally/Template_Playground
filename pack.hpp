@@ -96,4 +96,20 @@ struct UniqueImpl<P<>> {
 template <typename P>
 using Unique = typename UniqueImpl<Reverse<P>>::type;
 
+template <typename P, int N> struct PackGetImpl;
+
+template <template <typename...> typename P, int N, typename T, typename... Ts>
+struct PackGetImpl<P<T, Ts...>, N> {
+  using type = typename PackGetImpl<P<Ts...>, N-1>::type;
+};
+
+template <template <typename...> typename P, typename T, typename... Ts>
+struct PackGetImpl<P<T, Ts...>, 0> {
+  using type = T;
+};
+
+template <typename P, int N>
+using PackGet = typename PackGetImpl<P, N>::type;
+
+
 #endif
