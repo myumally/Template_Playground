@@ -9,4 +9,4 @@ En ligne de commande dans le terminal :
 ### Lien utile
 
 Je recommande de jeter un oeil à la thèse d'Alexis Pereda sur l'[Application de la métaprogrammation template à la conception de
-bibliothèques actives de parallélisation assistée]([https://www.google.com](https://phd.pereda.fr/assets/thesis/alexis_pereda_thesis.pdf)).
+bibliothèques actives de parallélisation assistée](https://phd.pereda.fr/assets/thesis/alexis_pereda_thesis.pdf).
