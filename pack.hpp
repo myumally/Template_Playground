@@ -133,4 +133,17 @@ struct RemoveCVImpl {
 template <typename T>
 using RemoveCV= typename RemoveCVImpl<T>::type;
 
+
+
+template <bool B> struct EnableIfImpl;
+
+template<>
+struct EnableIfImpl<true> {
+  using type = bool;
+};
+
+template <bool B>
+using EnableIf = typename EnableIfImpl<B>::type;
+
+
 #endif

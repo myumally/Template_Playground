@@ -1,5 +1,15 @@
 #include "pack.hpp"
 
+template<typename T, EnableIf<(sizeof(T) > 2)>* = nullptr>
+void f(T const&) {
+  std::puts("> 2");
+}
+
+template<typename T, EnableIf<(sizeof(T) <= 2)>* = nullptr>
+void f(T const&) {
+  std::puts("≤ 2");
+}
+
 int main(){
   using P0=Pack<char>;
   bool boo = packContains<P0, char>;
@@ -22,4 +32,7 @@ int main(){
   using D = RemoveCV<int const&>; // int const&
   using E = RemoveCV<int* const** const>; // int* const**
   printTypes<A, B, C, D, E>();
+
+  f('a'); // ≤ 2
+  f(0);   // > 2
 }
