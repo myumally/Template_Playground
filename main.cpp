@@ -15,4 +15,11 @@ int main(){
   using V2 = PackGet<P2, 2>;
   using V5 = PackGet<P2, 5>;
   printTypes<V0, V2, V5>();
+
+  using A = RemoveCV<int const>; // int
+  using B = RemoveCV<int>; // int
+  using C = RemoveCV<int* volatile>; // int*
+  using D = RemoveCV<int const&>; // int const&
+  using E = RemoveCV<int* const** const>; // int* const**
+  printTypes<A, B, C, D, E>();
 }

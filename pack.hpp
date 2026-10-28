@@ -112,4 +112,25 @@ template <typename P, int N>
 using PackGet = typename PackGetImpl<P, N>::type;
 
 
+
+template <typename T> struct RemoveCVImpl;
+
+template<typename T>
+struct RemoveCVImpl<T const> {
+  using type = T;
+};
+
+template<typename T>
+struct RemoveCVImpl<T volatile> {
+  using type = T;
+};
+
+template<typename T>
+struct RemoveCVImpl {
+  using type = T;
+};
+
+template <typename T>
+using RemoveCV= typename RemoveCVImpl<T>::type;
+
 #endif
