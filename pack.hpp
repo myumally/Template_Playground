@@ -146,4 +146,58 @@ template <bool B>
 using EnableIf = typename EnableIfImpl<B>::type;
 
 
+
+struct Add{
+  template <typename T> 
+    static T eval(T l, T r){
+      return l + r;
+    }
+};
+
+struct Mul{
+  template <typename T> 
+    static T eval(T l, T r){
+      return l * r;
+    }
+};
+
+
+template<typename T>
+class Val{
+  T _val;
+
+  public:
+  Val(T v) : _val(v){};
+  Val() {};
+
+  T eval() const {
+    return _val;
+  }
+};
+
+template<typename Op, typename L, typename R>
+struct BinExpr{
+  L l;
+  R r;
+
+  auto eval(){
+    return Op::eval(l.eval(), r.eval());
+  }
+
+  auto operator()(L l, R r){
+    return Op::eval(l.eval(), r.eval());
+  }
+};
+
+
+template<typename L, typename R>
+auto operator+(L l, R r) { 
+  return BinExpr<Add, L, R>{l,r};
+}
+
+template<typename L, typename R>
+auto operator*(L l, R r) { 
+  return BinExpr<Mul, L, R>{l,r};
+}
+
 #endif
